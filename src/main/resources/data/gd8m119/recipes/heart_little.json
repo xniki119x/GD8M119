@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "gd8m119:heart"
+    }
+  ],
+  "result": {
+    "count": 4,
+    "item": "gd8m119:heart_little"
+  }
+}

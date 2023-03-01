@@ -1,0 +1,25 @@
+modLoader = "javafml"
+loaderVersion = "[36,)"
+license = "All Rights Reserved"
+[[mods]]
+modId = "gd8m119"
+version = "1.0"
+displayName = "GD8M119"
+displayURL = "f1cont.com"
+logoFile="logo.png"
+authors = "niki119"
+description = '''
+
+'''
+[[dependencies.gd8m119]]
+modId = "forge"
+mandatory = true
+versionRange = "[36,)"
+ordering = "NONE"
+side = "BOTH"
+[[dependencies.gd8m119]]
+modId = "minecraft"
+mandatory = true
+versionRange = "[1.16.5,1.17)"
+ordering = "NONE"
+side = "BOTH"
