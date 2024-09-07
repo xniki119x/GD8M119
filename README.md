@@ -2,9 +2,9 @@ GD8M119 - Girls Day 8 March
 ===========================
 Info
 ----
-### Minecraft Version: `1.16.5`
+### Minecraft Version: `1.18.2`
 ### ModLoader: `Forge`
-### Forge Version: `36.2.39`
+### Forge Version: `40.2.21`
 ___
 ## English
 #### Items:
