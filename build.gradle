@@ -1,16 +1,12 @@
 plugins {
     id 'net.minecraftforge.gradle' version '5.1.+'
 }
-
-
 group = 'f1cont.niki119'
 version = '1.0'
-
 java {
     archivesBaseName = 'GD8M119'
     toolchain.languageVersion = JavaLanguageVersion.of(8)
 }
-
 minecraft {
     mappings channel: 'snapshot', version: '20210309-1.16.5'
     runs {
@@ -25,7 +21,6 @@ minecraft {
                 }
             }
         }
-
         server {
             workingDirectory project.file('run')
             property 'forge.logging.markers', 'REGISTRIES'
@@ -52,30 +47,15 @@ minecraft {
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 repositories {
 }
-
 dependencies {
     minecraft 'net.minecraftforge:forge:1.16.5-36.2.39'
-
-    // Real mod deobf dependency examples - these get remapped to your current mappings
-    // compileOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}:api") // Adds JEI API as a compile dependency
-    // runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}") // Adds the full JEI mod as a runtime dependency
-    // implementation fg.deobf("com.tterrag.registrate:Registrate:MC${mc_version}-${registrate_version}") // Adds registrate as a dependency
-
-    // Examples using mod jars from ./libs
-    // implementation fg.deobf("blank:coolmod-${mc_version}:${coolmod_version}")
-
-    // For more info...
-    // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
-    // http://www.gradle.org/docs/current/userguide/dependency_management.html
 }
-
-// Example for how to get properties into the manifest for reading at runtime.
 jar {
     manifest {
         attributes([
                 "Specification-Title"     : "gd8m119",
                 "Specification-Vendor"    : "niki119",
-                "Specification-Version"   : "1", // We are version 1 of ourselves
+                "Specification-Version"   : "1",
                 "Implementation-Title"    : project.name,
                 "Implementation-Version"  : project.jar.archiveVersion,
                 "Implementation-Vendor"   : "niki119",
@@ -83,9 +63,7 @@ jar {
         ])
     }
 }
-
 jar.finalizedBy('reobfJar')
-
 tasks.withType(JavaCompile).configureEach {
-    options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
+    options.encoding = 'UTF-8'
 }
