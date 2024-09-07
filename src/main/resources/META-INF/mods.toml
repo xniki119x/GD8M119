@@ -1,5 +1,5 @@
 modLoader = "javafml"
-loaderVersion = "[36,)"
+loaderVersion = "[40,)"
 license = "All Rights Reserved"
 [[mods]]
 modId = "gd8m119"
@@ -14,12 +14,12 @@ description = '''
 [[dependencies.gd8m119]]
 modId = "forge"
 mandatory = true
-versionRange = "[36,)"
+versionRange = "[40,)"
 ordering = "NONE"
 side = "BOTH"
 [[dependencies.gd8m119]]
 modId = "minecraft"
 mandatory = true
-versionRange = "[1.16.5,1.17)"
+versionRange = "[1.18.2,1.19)"
 ordering = "NONE"
 side = "BOTH"

@@ -1,60 +1,55 @@
 package f1cont.niki119.gd8m119.common.items;
 
-import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Rarity;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.util.SoundEvent;
-import net.minecraft.util.SoundEvents;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.TextFormatting;
-import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraft.world.World;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Rarity;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.level.Level;
 
 import javax.annotation.Nullable;
 import java.util.List;
 
 import static f1cont.niki119.gd8m119.common.utils.ModItemGroup.ITEM_GROUP;
+import static net.minecraft.ChatFormatting.DARK_PURPLE;
 
 public class HeartItem extends BaseItem {
     public HeartItem() {
         this("heart");
     }
     public HeartItem(String id) {
-        super(id, new Properties().group(ITEM_GROUP).rarity(Rarity.EPIC));
+        super(id, new Properties().tab(ITEM_GROUP).rarity(Rarity.EPIC));
     }
-
     @Override
-    public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
-        ItemStack stack = playerIn.getHeldItem(handIn);
-        if(worldIn.isRemote) {
+    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+        ItemStack stack = player.getItemInHand(hand);
+        if(!level.isClientSide) {
             if (stack.getItem() instanceof HeartItem) {
-                CompoundNBT nbt = stack.getOrCreateTag();
+                CompoundTag nbt = stack.getOrCreateTag();
                 if (nbt.getString("owner").equals("")) {
-                    nbt.putString("owner", playerIn.getDisplayName().getString());
+                    nbt.putString("owner", player.getDisplayName().getString());
                     stack.setTag(nbt);
-                    playerIn.playSound(SoundEvents.ENTITY_CHICKEN_EGG, 1,1);
-                    return ActionResult.resultConsume(stack);
+                    player.playSound(SoundEvents.CHICKEN_EGG, 1,1);
+                    return InteractionResultHolder.consume(stack);
                 }
             }
         }
-        return ActionResult.resultPass(stack);
+        return InteractionResultHolder.pass(stack);
     }
-
     public String getOwner(ItemStack stack){
-        CompoundNBT nbt = stack.getTag();
+        CompoundTag nbt = stack.getTag();
         if(nbt != null) return nbt.getString("owner");
         return "";
     }
-
     @Override
-    public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
-        super.addInformation(stack, worldIn, tooltip, flagIn);
+    public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
+        super.appendHoverText(stack, level, tooltip, flag);
         String o = getOwner(stack);
-        if(!o.equals("")) tooltip.add(new TranslationTextComponent("from %s",o).mergeStyle(TextFormatting.DARK_PURPLE));
+        if(!o.equals("")) tooltip.add(new TranslatableComponent("from %s",o).withStyle(DARK_PURPLE));
     }
 }

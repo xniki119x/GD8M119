@@ -1,14 +1,17 @@
 plugins {
-    id 'net.minecraftforge.gradle' version '5.1.+'
+    id 'idea'
+    id 'net.minecraftforge.gradle' version '[6.0.16,6.2)'
+    id 'org.parchmentmc.librarian.forgegradle' version '1.+'
 }
 group = 'f1cont.niki119'
 version = '1.0'
 java {
-    archivesBaseName = 'GD8M119'
-    toolchain.languageVersion = JavaLanguageVersion.of(8)
+    archivesBaseName = 'GD8M119-1.18.2'
+    toolchain.languageVersion = JavaLanguageVersion.of(17)
 }
 minecraft {
-    mappings channel: 'snapshot', version: '20210309-1.16.5'
+    mappings channel: 'parchment', version: '2022.11.06-1.18.2'
+    copyIdeResources = true
     runs {
         client {
             workingDirectory project.file('run')
@@ -48,7 +51,7 @@ sourceSets.main.resources { srcDir 'src/generated/resources' }
 repositories {
 }
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.16.5-36.2.39'
+    minecraft 'net.minecraftforge:forge:1.18.2-40.2.21'
 }
 jar {
     manifest {
